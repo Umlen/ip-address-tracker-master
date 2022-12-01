@@ -18,6 +18,9 @@ html, body {
 
 body {
     font-family: 'Rubik', sans-serif;
+    display: flex;
+    flex-direction: column;
+    font-size: .75rem;
 }
 
 header {
@@ -49,6 +52,7 @@ header {
     border: none;
     text-overflow: ellipsis;
     font-family: inherit;
+    font-size: 1.125em;
 }
 
 #search-input:focus {
@@ -71,11 +75,12 @@ header {
 
 .info-container {
     position: absolute;
+    z-index: 1000;
     left: 10%;
     right: 10%;
     bottom: 0;
     transform: translateY(50%);
-    padding: 1rem 2rem;
+    padding: 1em 2em;
     text-align: center;
     background-color: var(--simple-white-color);
     border-radius: 15px;
@@ -84,7 +89,7 @@ header {
 
 .info-heading {
     color: var(--light-gray-color);
-    font-size: .7rem;
+    font-size: .7em;
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 1.5px;
@@ -92,11 +97,18 @@ header {
 
 .info-text {
     color: var(--dark-gray-color);
-    font-size: 1.125rem;
+    font-size: 1.125em;
     font-weight: 700;
 }
 
+#map {
+    flex-grow: 1;
+}
+
 @media (min-width: 800px) {
+    body {
+        font-size: 1rem;
+    }
     header {
         height: 250px;
     }

@@ -11,5 +11,12 @@ searchBtn.addEventListener('click', () => {
             document.getElementById('location').textContent = `${data.location.city}, ${data.location.region} ${data.location.postalCode}`;
             document.getElementById('timezone').textContent = `UTC ${data.location.timezone}`;
             document.getElementById('isp').textContent = data.isp;
+            const map = L.map('map').setView([data.location.lat, data.location.lng], 12);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 15,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            map.removeControl(map.zoomControl);
+            const marker = L.marker([data.location.lat, data.location.lng]).addTo(map);
         } );
 })
