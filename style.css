@@ -23,7 +23,7 @@ body {
     font-size: .75rem;
 }
 
-header {
+.header {
     background-image: url(/images/pattern-bg.png);
     background-size: cover;
     text-align: center;
@@ -31,7 +31,7 @@ header {
     position: relative;
 }
 
-.main-header {
+.main-title {
     margin: 0;
     padding: 2rem 0;
     color: var(--simple-white-color);
@@ -103,6 +103,26 @@ header {
 
 #map {
     flex-grow: 1;
+}
+
+.footer {
+    text-align: center;
+    padding: .5em 0;
+    color: var(--simple-white-color);
+    background-image: url(/images/pattern-bg.png);
+    background-size: cover;
+}
+
+.footer-links {
+    color: var(--simple-white-color);
+    -webkit-text-underline-position: under;
+    -ms-text-underline-position: under;
+    text-underline-position: under; 
+}
+
+.footer-links:hover,
+.footer-links:focus {
+    color: var(--light-gray-color);
 }
 
 @media (min-width: 800px) {
