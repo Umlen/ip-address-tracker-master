@@ -6,12 +6,32 @@ searchBtn.addEventListener( 'click', getIpFromApi );
 
 function getIpFromApi() {
     searchIp = searchInput.value;
-    fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_qZbKRLE4U6S4IxS9ZZA1cADworkXa&ipAddress=${searchIp}`)
+    if ( ipValidator(searchIp) ) {
+        fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_qZbKRLE4U6S4IxS9ZZA1cADworkXa&ipAddress=${searchIp}`)
         .then( response => response.json() )
         .then( data => {
             renderInfo(data);
             renderMap(data);
         } );
+    } else {
+        alert('Enter valid IP address!');
+        searchInput.value= '';
+    }
+}
+
+function ipValidator(ip) {
+    const regExp = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
+    if ( regExp.test(ip) ) {
+       ipArr = ip.split('.');
+       for (let i = 0; i < ipArr.length; i++) {
+        if (ipArr[i] > 255) {
+            return false;
+        }
+       }
+    } else {
+        return false;
+    }
+    return true;
 }
 
 function renderInfo(ipDataObj) {
