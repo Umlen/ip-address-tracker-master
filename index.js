@@ -2,20 +2,34 @@ const searchBtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('search-input');
 let map = undefined;
 
+renderUserAddress();
 searchBtn.addEventListener( 'click', getIpFromApi );
 
+function renderUserAddress() {
+    fetch(`https://api.ipify.org?format=json`)
+    .then( response => response.json() )
+    .then( data => {
+        searchInput.value = data.ip;
+        getIpFromApi();
+    } );
+}
+
 function getIpFromApi() {
-    searchIp = searchInput.value;
-    if ( ipValidator(searchIp) ) {
-        fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_qZbKRLE4U6S4IxS9ZZA1cADworkXa&ipAddress=${searchIp}`)
+    searchValue = searchInput.value;
+    if ( ipValidator(searchValue) ) {
+        fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_qZbKRLE4U6S4IxS9ZZA1cADworkXa&ipAddress=${searchValue}`)
         .then( response => response.json() )
         .then( data => {
             renderInfo(data);
             renderMap(data);
         } );
     } else {
-        alert('Enter valid IP address!');
-        searchInput.value= '';
+        fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_qZbKRLE4U6S4IxS9ZZA1cADworkXa&domain=${searchValue}`)
+        .then( response => response.json() )
+        .then( data => {
+            renderInfo(data);
+            renderMap(data);
+        } );
     }
 }
 
